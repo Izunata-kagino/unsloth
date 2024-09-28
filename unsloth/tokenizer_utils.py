@@ -630,6 +630,7 @@ def fix_chat_template(tokenizer):
     yes = tokenizer.apply_chat_template(messages, add_generation_prompt =  True, tokenize = False)
 
     if no == yes:
+        break
         # SAME?! That's not good! We check for add_generation_prompt
         if "{% if add_generation_prompt %}" not in chat_template:
             # Try fixing it by adding it
