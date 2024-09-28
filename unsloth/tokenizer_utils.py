@@ -629,32 +629,32 @@ def fix_chat_template(tokenizer):
     no  = tokenizer.apply_chat_template(messages, add_generation_prompt = False, tokenize = False)
     yes = tokenizer.apply_chat_template(messages, add_generation_prompt =  True, tokenize = False)
 
-    if no == yes:
-        break
-        # SAME?! That's not good! We check for add_generation_prompt
-        if "{% if add_generation_prompt %}" not in chat_template:
-            # Try fixing it by adding it
-            new_chat_template = _fix_chat_template(chat_template)
-            if "{% if add_generation_prompt %}" not in new_chat_template:
-                raise RuntimeError(
-                    f"Unsloth: The tokenizer `{tokenizer.name_or_path}`\n"\
-                    "does not have a {% if add_generation_prompt %} for generation purposes.\n"\
-                    "Please file a bug report immediately - thanks!"
-                )
-            else:
-                logger.warning_once(
-                    "Unsloth: We successfully patched the tokenizer to add a {% if add_generation_prompt %} to the chat_template.\n"\
-                    "This is not a bug, but please notify the Unsloth maintainers - thanks!"
-                )
-                chat_template = new_chat_template
-            pass
-        else:
-            raise RuntimeError(
-                f"Unsloth: The tokenizer `{tokenizer.name_or_path}`\n"\
-                "has a {% if add_generation_prompt %} for generation purposes, but wasn't provided correctly.\n"\
-                "Please file a bug report immediately - thanks!"
-            )
-        pass
+    # if no == yes:
+        
+    #     # SAME?! That's not good! We check for add_generation_prompt
+    #     if "{% if add_generation_prompt %}" not in chat_template:
+    #         # Try fixing it by adding it
+    #         new_chat_template = _fix_chat_template(chat_template)
+    #         if "{% if add_generation_prompt %}" not in new_chat_template:
+    #             raise RuntimeError(
+    #                 f"Unsloth: The tokenizer `{tokenizer.name_or_path}`\n"\
+    #                 "does not have a {% if add_generation_prompt %} for generation purposes.\n"\
+    #                 "Please file a bug report immediately - thanks!"
+    #             )
+    #         else:
+    #             logger.warning_once(
+    #                 "Unsloth: We successfully patched the tokenizer to add a {% if add_generation_prompt %} to the chat_template.\n"\
+    #                 "This is not a bug, but please notify the Unsloth maintainers - thanks!"
+    #             )
+    #             chat_template = new_chat_template
+    #         pass
+    #     else:
+    #         raise RuntimeError(
+    #             f"Unsloth: The tokenizer `{tokenizer.name_or_path}`\n"\
+    #             "has a {% if add_generation_prompt %} for generation purposes, but wasn't provided correctly.\n"\
+    #             "Please file a bug report immediately - thanks!"
+    #         )
+    #     pass
     pass
     return chat_template
 pass
